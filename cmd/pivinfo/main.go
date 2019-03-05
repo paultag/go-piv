@@ -38,6 +38,10 @@ func main() {
 		fmt.Printf("Serial: %x\n", cert.SerialNumber)
 		fmt.Printf(" CN: %s\n", cert.Subject.CommonName)
 
+		if pcert.CompletedNACI != nil {
+			fmt.Printf(" NACI: %t\n", *pcert.CompletedNACI)
+		}
+
 		for _, name := range pcert.FASCs {
 			fmt.Printf(" FASC: %s\n", name)
 		}
