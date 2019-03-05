@@ -52,7 +52,7 @@ type Certificate struct {
 	//
 	// These are *not* valid Emails. For the cardholder's email, access the
 	// standard x509.EmailAddresses SAN.
-	PricipalNames []string
+	PrincipalNames []string
 
 	// FASC, or Federal Agency Smartcard Number, is a legacy field that was
 	// used to enable building access control systems. It's largely not used
@@ -68,7 +68,7 @@ func NewCertificate(cert *x509.Certificate) (*Certificate, error) {
 
 	ret.CompletedNACI = HasNACI(cert)
 
-	ret.PricipalNames, err = othername.UPNs(cert)
+	ret.PrincipalNames, err = othername.UPNs(cert)
 	if err != nil {
 		return nil, err
 	}
