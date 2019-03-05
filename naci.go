@@ -30,12 +30,12 @@ var (
 )
 
 // Check to see if the PIV Certificate in question has the id-piv-NACI
-// ObjectIdentifier, and if so, return the answer to if the NACI has been
-// run on the cardholder.
+// ObjectIdentifier, and if so, return the answer to if the NACI has been run
+// on the cardholder.
 //
 // This is sometimes wrong (usually in saying 'no' when someone actually has
-// had a NACI), so please ensure this is never used as an authoritative source
-// of truth.
+// had a NACI -- or better than NACI check!), so please ensure this is never
+// used as an authoritative source of truth for someone's level of vetting.
 func HasNACI(cert *x509.Certificate) *bool {
 	for _, extension := range cert.Extensions {
 		if extension.Id.Equal(oidNACI) {
