@@ -41,7 +41,7 @@ func main() {
 		fmt.Printf("Serial: %x\n", cert.SerialNumber)
 		fmt.Printf(" CN: %s\n", cert.Subject.CommonName)
 
-		for _, uid := range pcert.UserIDs {
+		for _, uid := range pcert.Subject.UserID {
 			fmt.Printf(" UID: %s\n", uid)
 		}
 

@@ -22,10 +22,21 @@ package piv
 
 import (
 	"crypto/x509"
+	"crypto/x509/pkix"
 
 	"pault.ag/go/othername"
 	"pault.ag/go/othername/fasc"
 )
+
+// Extension of the built-in crypto/x509/pkix.Name type. This contains
+// the Name as an any member of the piv.Name struct.
+type Name struct {
+	pkix.Name
+
+	// Any User IDs for any systems the cardholder may be using. This is an
+	// optional Name that may be present in the Subject pkix.Name.
+	UserID []string
+}
 
 // Extension of the built-in crypto/x509.Certificate type. This contains the
 // Certificate as an anonymous member of the piv.Certificate struct.
@@ -35,6 +46,8 @@ import (
 // cardholder has a completed NACI.
 type Certificate struct {
 	*x509.Certificate
+
+	Subject Name
 
 	// This field is a largely unreliable and poor indicator of the cardholder's
 	// level of vetting -- it merely asserts as to if the cardholder has a
@@ -58,10 +71,6 @@ type Certificate struct {
 	// used to enable building access control systems. It's largely not used
 	// but still written to new Certificates.
 	FASCs []fasc.FASC
-
-	// Any User IDs for any systems the cardholder may be using. This is an
-	// optional Name that may be present in the Subject pkix.Name.
-	UserIDs []string
 }
 
 // Create a piv.Certificate from a standard crypto/x509.Certificate, parsing
@@ -72,7 +81,8 @@ func NewCertificate(cert *x509.Certificate) (*Certificate, error) {
 
 	ret.CompletedNACI = HasNACI(cert)
 
-	ret.UserIDs = UserIDs(cert.Subject)
+	ret.Subject = Name{Name: cert.Subject}
+	ret.Subject.UserID = UserIDs(cert.Subject)
 
 	ret.PrincipalNames, err = othername.UPNs(cert)
 	if err != nil {
