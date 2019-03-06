@@ -58,6 +58,10 @@ type Certificate struct {
 	// used to enable building access control systems. It's largely not used
 	// but still written to new Certificates.
 	FASCs []fasc.FASC
+
+	// Any User IDs for any systems the cardholder may be using. This is an
+	// optional Name that may be present in the Subject pkix.Name.
+	UserIDs []string
 }
 
 // Create a piv.Certificate from a standard crypto/x509.Certificate, parsing
@@ -67,6 +71,8 @@ func NewCertificate(cert *x509.Certificate) (*Certificate, error) {
 	var err error
 
 	ret.CompletedNACI = HasNACI(cert)
+
+	ret.UserIDs = UserIDs(cert.Subject)
 
 	ret.PrincipalNames, err = othername.UPNs(cert)
 	if err != nil {
