@@ -80,4 +80,15 @@ func NewCertificate(cert *x509.Certificate) (*Certificate, error) {
 	return &ret, nil
 }
 
+// Parse the raw DER into an x.509 Certificate struct, then parse out PIV
+// specific fields. This is shorthand for calling x509.ParseCertificate, then
+// passing that into piv.NewCertificate.
+func ParseCertificate(bytes []byte) (*Certificate, error) {
+	cert, err := x509.ParseCertificate(bytes)
+	if err != nil {
+		return nil, err
+	}
+	return NewCertificate(cert)
+}
+
 // vim: foldmethod=marker
