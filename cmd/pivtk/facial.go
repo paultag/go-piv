@@ -10,10 +10,13 @@ import (
 
 	"pault.ag/go/cbeff/jpeg2000"
 	"pault.ag/go/piv/biometrics"
+	"pault.ag/go/piv/cmd/pivtk/internal"
 )
 
 func Facial(c *cli.Context) error {
 	imageFormatString := c.String("image-output")
+	asciiOut := c.Bool("ascii-out")
+	imageOut := c.Bool("image-out")
 
 	for _, path := range c.Args() {
 		fd, err := os.Open(path)
@@ -40,12 +43,19 @@ func Facial(c *cli.Context) error {
 				return err
 			}
 
-			fd, err := os.Create(fmt.Sprintf(imageFormatString, i))
-			ohshit(err)
-			defer fd.Close()
-			if err := png.Encode(fd, img); err != nil {
-				fd.Close()
+			if asciiOut {
+				if err := internal.PrintBraille(img); err != nil {
+					return err
+				}
+			}
+
+			if imageOut {
+				fd, err := os.Create(fmt.Sprintf(imageFormatString, i))
 				ohshit(err)
+				defer fd.Close()
+				if err := png.Encode(fd, img); err != nil {
+					return err
+				}
 			}
 		}
 
@@ -59,6 +69,12 @@ var FacialCommand = cli.Command{
 	Action: Facial,
 	Usage:  "",
 	Flags: []cli.Flag{
+		cli.BoolFlag{
+			Name: "image-out",
+		},
+		cli.BoolFlag{
+			Name: "ascii-out",
+		},
 		cli.StringFlag{
 			Name:  "image-output",
 			Value: "facial.%d.png",
