@@ -31,7 +31,7 @@ import (
 // CBEFF, as read from a PIV, is wrapped in an ASN.1 "TLV" structure.
 // This will unwrap the data inside the structure, and attempt to parse
 // the underlying CBEFF data.
-func ParseTLVCBEFF(data []byte) (*CBEFF, error) {
+func ParseTLVCBEFF(data []byte) (*cbeff.CBEFF, error) {
 	rv := asn1.RawValue{}
 	rest, err := asn1.Unmarshal(data, &rv)
 	if err != nil {
