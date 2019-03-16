@@ -14,7 +14,7 @@ import (
 )
 
 func Facial(c *cli.Context) error {
-	imageFormatString := c.String("image-output")
+	imageFormatString := "%s.facial.%d.png"
 	asciiOut := c.Bool("ascii-out")
 	imageOut := c.Bool("image-out")
 
@@ -34,6 +34,18 @@ func Facial(c *cli.Context) error {
 			return err
 		}
 
+		fasc, err := cbeff.Header.ParseFASC()
+		if err != nil {
+			return err
+		}
+
+		personId := fmt.Sprintf(
+			"%d%d%d",
+			fasc.OrganizationIdentifier,
+			fasc.PersonIdentifier,
+			fasc.PersonAssociation,
+		)
+
 		facial, err := cbeff.Facial()
 		ohshit(err)
 
@@ -50,7 +62,7 @@ func Facial(c *cli.Context) error {
 			}
 
 			if imageOut {
-				fd, err := os.Create(fmt.Sprintf(imageFormatString, i))
+				fd, err := os.Create(fmt.Sprintf(imageFormatString, personId, i))
 				ohshit(err)
 				defer fd.Close()
 				if err := png.Encode(fd, img); err != nil {
@@ -74,11 +86,6 @@ var FacialCommand = cli.Command{
 		},
 		cli.BoolFlag{
 			Name: "ascii-out",
-		},
-		cli.StringFlag{
-			Name:  "image-output",
-			Value: "facial.%d.png",
-			Usage: "",
 		},
 	},
 }
