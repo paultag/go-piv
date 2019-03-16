@@ -84,7 +84,7 @@ var FacialCommand = cli.Command{
 		cli.BoolFlag{
 			Name: "image-out",
 		},
-		cli.BoolFlag{
+		cli.BoolTFlag{
 			Name: "ascii-out",
 		},
 	},
