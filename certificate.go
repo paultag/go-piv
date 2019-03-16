@@ -24,8 +24,8 @@ import (
 	"crypto/x509"
 	"crypto/x509/pkix"
 
+	"pault.ag/go/fasc"
 	"pault.ag/go/othername"
-	"pault.ag/go/othername/fasc"
 )
 
 // Extension of the built-in crypto/x509/pkix.Name type. This contains
