@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/chzyer/readline"
 	"github.com/urfave/cli"
 
 	// "pault.ag/go/piv"
@@ -11,8 +12,19 @@ import (
 )
 
 func Dump(c *cli.Context) error {
+	var pin *string = nil
+	if c.Bool("login") {
+		pinBytes, err := readline.Password("Enter PIN: ")
+		if err != nil {
+			return err
+		}
+		npin := string(pinBytes)
+		pin = &npin
+	}
+
 	token, err := pkcs11.New(pkcs11.Config{
 		Module: "/usr/lib/x86_64-linux-gnu/pkcs11/opensc-pkcs11.so",
+		PIN:    pin,
 	})
 	if err != nil {
 		return err
@@ -56,5 +68,7 @@ var DumpCommand = cli.Command{
 	Name:   "dump",
 	Action: Dump,
 	Usage:  "",
-	Flags:  []cli.Flag{},
+	Flags: []cli.Flag{
+		cli.BoolFlag{Name: "login"},
+	},
 }
