@@ -14,5 +14,5 @@ const (
 	CardAuthCertificateLabel string = "Certificate for Card Authentication"
 
 	// FingerprintLabel string = "Cardholder Fingerprints"
-	// FacialLabel      string = "Cardholder Facial Image"
+	FacialLabel string = "Cardholder Facial Image"
 )

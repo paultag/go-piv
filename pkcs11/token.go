@@ -3,7 +3,9 @@ package pkcs11
 import (
 	"fmt"
 
+	"pault.ag/go/cbeff"
 	"pault.ag/go/piv"
+	"pault.ag/go/piv/biometrics"
 
 	"github.com/miekg/pkcs11"
 )
@@ -22,6 +24,15 @@ type Config struct {
 
 	//
 	TokenLabel string
+}
+
+// Create a pkcs11.Attribute array containing constraints that should
+// uniquely identify the PKCS#11 Certificate we're interested in
+func (c Config) GetDataTemplate(label string) []*pkcs11.Attribute {
+	return []*pkcs11.Attribute{
+		pkcs11.NewAttribute(pkcs11.CKA_LABEL, label),
+		pkcs11.NewAttribute(pkcs11.CKA_CLASS, pkcs11.CKO_DATA),
+	}
 }
 
 // Create a pkcs11.Attribute array containing constraints that should
@@ -206,6 +217,24 @@ func (s Token) getAttribute(locate, attributes []*pkcs11.Attribute) (*pkcs11.Att
 	}
 
 	return attr[0], nil
+}
+
+// Query the underlying HSM Store for the x509 Certificate we're interested in,
+// and return a Go x509.Certificate.
+func (s Token) cbeff(label string) (*cbeff.CBEFF, error) {
+	dataAttribute, err := s.getAttribute(
+		s.config.GetDataTemplate(label),
+		[]*pkcs11.Attribute{pkcs11.NewAttribute(pkcs11.CKA_VALUE, nil)},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return biometrics.ParseTLVCBEFF(dataAttribute.Value)
+}
+
+func (t Token) Facial() (*cbeff.CBEFF, error) {
+	return t.cbeff(FacialLabel)
 }
 
 // Query the underlying HSM Store for the x509 Certificate we're interested in,

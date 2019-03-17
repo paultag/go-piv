@@ -39,6 +39,16 @@ func Dump(c *cli.Context) error {
 		fmt.Printf("No Certificate the Card Authentication slot\n")
 	}
 
+	cbeff, err := token.Facial()
+	if err != nil {
+		if err != pkcs11.NotFound {
+			return err
+		}
+		fmt.Printf("Facial data not found\n")
+	} else {
+		fmt.Printf("%s\n", cbeff)
+	}
+
 	return nil
 }
 
