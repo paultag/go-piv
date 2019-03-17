@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 
 	"encoding/pem"
@@ -17,8 +18,29 @@ func OutputPEMFunc(cf func() (*piv.Certificate, error), w io.Writer) error {
 }
 
 func OutputPEM(cert *piv.Certificate, w io.Writer) error {
-	return pem.Encode(w, &pem.Block{
+	fmt.Fprintf(w, "Certificate:\n")
+	fmt.Fprintf(w, "  Subject: %s\n", cert.Subject.String())
+	fmt.Fprintf(w, "  Issuer: %s\n", cert.Issuer.String())
+
+	if len(cert.PrincipalNames) > 0 {
+		fmt.Fprintf(w, "  UPNs:\n")
+		for _, upn := range cert.PrincipalNames {
+			fmt.Fprintf(w, "    %s\n", upn)
+		}
+	}
+
+	if len(cert.FASCs) > 0 {
+		fmt.Fprintf(w, "  FASC:\n")
+		for _, fasc := range cert.FASCs {
+			fmt.Fprintf(w, "    %s\n", fasc.String())
+		}
+	}
+
+	err := pem.Encode(w, &pem.Block{
 		Type:  "CERTIFICATE",
 		Bytes: cert.Raw,
 	})
+	fmt.Fprintf(w, "\n")
+
+	return err
 }
