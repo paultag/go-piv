@@ -2,10 +2,14 @@ package main
 
 import (
 	"fmt"
+	"image/png"
 	"io"
+	"os"
 
 	"encoding/pem"
 
+	"pault.ag/go/cbeff"
+	"pault.ag/go/cbeff/jpeg2000"
 	"pault.ag/go/piv"
 )
 
@@ -43,4 +47,45 @@ func OutputPEM(cert *piv.Certificate, w io.Writer) error {
 	fmt.Fprintf(w, "\n")
 
 	return err
+}
+
+func WriteFacialToDisk(cbeff *cbeff.CBEFF) error {
+	imageFormatString := "%s.facial.%d.png"
+
+	fasc, err := cbeff.Header.ParseFASC()
+	if err != nil {
+		return err
+	}
+
+	personId := fmt.Sprintf(
+		"%d%d%d",
+		fasc.OrganizationIdentifier,
+		fasc.PersonIdentifier,
+		fasc.PersonAssociation,
+	)
+
+	facial, err := cbeff.Facial()
+	if err != nil {
+		return err
+	}
+
+	for i, image := range facial.Images {
+		img, err := jpeg2000.Parse(image.Data)
+		if err != nil {
+			return err
+		}
+
+		fd, err := os.Create(fmt.Sprintf(imageFormatString, personId, i))
+		if err != nil {
+			return err
+		}
+
+		defer fd.Close()
+		if err := png.Encode(fd, img); err != nil {
+			return err
+		}
+		fd.Close()
+	}
+
+	return nil
 }

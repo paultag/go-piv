@@ -58,7 +58,9 @@ func Dump(c *cli.Context) error {
 		}
 		fmt.Printf("Facial data not found\n")
 	} else {
-		fmt.Printf("%s\n", cbeff)
+		if err := WriteFacialToDisk(cbeff); err != nil {
+			return err
+		}
 	}
 
 	return nil
