@@ -13,6 +13,10 @@ const (
 	// CardAuthPubkeyLabel      string = "CARD AUTH pubkey"
 	CardAuthCertificateLabel string = "Certificate for Card Authentication"
 
+	//
+	//
+	KeyManagementCertificateLabel string = "Certificate for Key Management"
+
 	// FingerprintLabel string = "Cardholder Fingerprints"
 	FacialLabel string = "Cardholder Facial Image"
 )

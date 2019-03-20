@@ -259,6 +259,10 @@ func (t Token) DigitalSignatureCertificate() (*piv.Certificate, error) {
 	return t.certificate(SignCertificateLabel)
 }
 
+func (t Token) KeyManagementCertificate() (*piv.Certificate, error) {
+	return t.certificate(KeyManagementCertificateLabel)
+}
+
 func (t Token) CardAuthenticationCertificate() (*piv.Certificate, error) {
 	return t.certificate(CardAuthCertificateLabel)
 }
