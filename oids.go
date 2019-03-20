@@ -1,6 +1,8 @@
 package piv
 
 import (
+	"fmt"
+
 	"encoding/asn1"
 )
 
@@ -29,109 +31,140 @@ type Policy struct {
 	Issued Issued
 }
 
-const (
+// Output a human readable string to grok what Policy this is
+func (p Policy) String() string {
+	return fmt.Sprintf(
+		"%s (%s) person=%t hardware=%t",
+		p.Name,
+		p.Id.String(),
+		p.Issued.Person,
+		p.Issued.Hardware,
+	)
+}
+
+func Policies(ids []asn1.ObjectIdentifier) []Policy {
+	ret := []Policy{}
+	for _, id := range ids {
+		policy, ok := allPoliciesMap[id.String()]
+		if !ok {
+			continue
+		}
+		ret = append(ret, policy)
+	}
+	return ret
+}
+
+func policyMap(policies []Policy) map[string]Policy {
+	ret := map[string]Policy{}
+	for _, policy := range policies {
+		ret[policy.Id.String()] = policy
+	}
+	return ret
+}
+
+var (
 	// DoDBasic = Policy{
 	// 	Name:       "DoDBasic",
 	// 	Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 2},
-	// 	TokenClass: TokenClass{
+	// 	Issued: Issued{
 	// 	},
 	// }
 
 	// Medium assurance
 	DoDMediumNPE = Policy{
-		Name:       "DoDMediumNPE",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 17},
-		TokenClass: TokenClass{Person: false, Hardware: false},
+		Name:   "DoDMediumNPE",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 17},
+		Issued: Issued{Person: false, Hardware: false},
 	}
 
 	DoDMediumNPE112 = Policy{
-		Name:       "DoDMediumNPE112",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 36},
-		TokenClass: TokenClass{Person: false, Hardware: false},
+		Name:   "DoDMediumNPE112",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 36},
+		Issued: Issued{Person: false, Hardware: false},
 	}
 
 	DoDMediumNPE128 = Policy{
-		Name:       "DoDMediumNPE128",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 37},
-		TokenClass: TokenClass{Person: false, Hardware: false},
+		Name:   "DoDMediumNPE128",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 37},
+		Issued: Issued{Person: false, Hardware: false},
 	}
 
 	DoDMedium = Policy{
-		Name:       "DoDMedium",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 5},
-		TokenClass: TokenClass{Person: true, Hardware: false},
+		Name:   "DoDMedium",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 5},
+		Issued: Issued{Person: true, Hardware: false},
 	}
 
 	DoDMedium2048 = Policy{
-		Name:       "DoDMedium2048",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 18},
-		TokenClass: TokenClass{Person: true, Hardware: false},
+		Name:   "DoDMedium2048",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 18},
+		Issued: Issued{Person: true, Hardware: false},
 	}
 
 	DoDMedium112 = Policy{
-		Name:       "DoDMedium112",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 39},
-		TokenClass: TokenClass{Person: true, Hardware: false},
+		Name:   "DoDMedium112",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 39},
+		Issued: Issued{Person: true, Hardware: false},
 	}
 
 	DoDMedium128 = Policy{
-		Name:       "DoDMedium128",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 40},
-		TokenClass: TokenClass{Person: true, Hardware: false},
+		Name:   "DoDMedium128",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 40},
+		Issued: Issued{Person: true, Hardware: false},
 	}
 
 	DoDMediumHardware = Policy{
-		Name:       "DoDMediumHardware",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 9},
-		TokenClass: TokenClass{Person: true, Hardware: true},
+		Name:   "DoDMediumHardware",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 9},
+		Issued: Issued{Person: true, Hardware: true},
 	}
 
 	DoDMediumHardware2048 = Policy{
-		Name:       "DoDMediumHardware2048",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 19},
-		TokenClass: TokenClass{Person: true, Hardware: true},
+		Name:   "DoDMediumHardware2048",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 19},
+		Issued: Issued{Person: true, Hardware: true},
 	}
 
 	DoDMediumHardware112 = Policy{
-		Name:       "DoDMediumHardware112",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 42},
-		TokenClass: TokenClass{Person: true, Hardware: true},
+		Name:   "DoDMediumHardware112",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 42},
+		Issued: Issued{Person: true, Hardware: true},
 	}
 
 	DoDMediumHardware128 = Policy{
-		Name:       "DoDMediumHardware128",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 43},
-		TokenClass: TokenClass{Person: true, Hardware: true},
+		Name:   "DoDMediumHardware128",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 43},
+		Issued: Issued{Person: true, Hardware: true},
 	}
 
 	DoDPIVAuth = Policy{
-		Name:       "DoDPIVAuth",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 10},
-		TokenClass: TokenClass{Person: true, Hardware: true},
+		Name:   "DoDPIVAuth",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 10},
+		Issued: Issued{Person: true, Hardware: true},
 	}
 
 	DoDPIVAuth2048 = Policy{
-		Name:       "DoDPIVAuth2048",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 20},
-		TokenClass: TokenClass{Person: true, Hardware: true},
+		Name:   "DoDPIVAuth2048",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 20},
+		Issued: Issued{Person: true, Hardware: true},
 	}
 
 	// DoDPeerInterop = Policy{
 	// 	Name:       "DoDPeerInterop",
 	// 	Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 31},
-	// 	TokenClass: TokenClass{},
+	// 	Issued: Issued{},
 	// }
 
 	DoDFORTEZZA = Policy{
-		Name:       "DoDFORTEZZA",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 4},
-		TokenClass: TokenClass{Person: true, Hardware: true},
+		Name:   "DoDFORTEZZA",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 4},
+		Issued: Issued{Person: true, Hardware: true},
 	}
 
 	DoDType1 = Policy{
-		Name:       "DoDType1",
-		Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 6},
-		TokenClass: TokenClass{Person: false, Hardware: true},
+		Name:   "DoDType1",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 6},
+		Issued: Issued{Person: false, Hardware: true},
 	}
 
 	allPolicies []Policy = []Policy{
@@ -142,4 +175,6 @@ const (
 		DoDFORTEZZA,
 		DoDType1,
 	}
+
+	allPoliciesMap = policyMap(allPolicies)
 )

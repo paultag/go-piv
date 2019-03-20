@@ -71,6 +71,8 @@ type Certificate struct {
 	// used to enable building access control systems. It's largely not used
 	// but still written to new Certificates.
 	FASCs []fasc.FASC
+
+	Policies []Policy
 }
 
 // Create a piv.Certificate from a standard crypto/x509.Certificate, parsing
@@ -92,6 +94,8 @@ func NewCertificate(cert *x509.Certificate) (*Certificate, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	ret.Policies = Policies(ret.PolicyIdentifiers)
 
 	return &ret, nil
 }
