@@ -26,14 +26,48 @@ import (
 	"encoding/asn1"
 )
 
-type assuranceLevel string
+// This is *not* an LOA number as defined by OMB M04-04
+type assuranceLevel uint
 
 var (
-	RudimentaryAssurance assuranceLevel = "rudimentary"
-	BasicAssurance       assuranceLevel = "basic"
-	MediumAssurance      assuranceLevel = "medium"
-	HighAssurance        assuranceLevel = "high"
+	UnknownAssurance     assuranceLevel = 0
+	RudimentaryAssurance assuranceLevel = 1
+	BasicAssurance       assuranceLevel = 2
+	MediumAssurance      assuranceLevel = 3
+	HighAssurance        assuranceLevel = 4
 )
+
+func (a assuranceLevel) String() string {
+	switch a {
+	case RudimentaryAssurance:
+		return "Rudimentary"
+	case BasicAssurance:
+		return "Basic"
+	case MediumAssurance:
+		return "Medium"
+	case HighAssurance:
+		return "High"
+	}
+	return "Unknown"
+}
+
+// This returns -1 if the LOA this function is bound to is _less_ strict
+// than the given LOA, 0 if they're the same, and 1 if the bound LOA
+// is _more_ strict than the given LOA.
+//
+// MediumAssurance.Compare(RudimentaryAssurance) // -1
+// MediumAssurance.Compare(HighAssurance)        // 1
+// MediumAssurance.Compare(MediumAssurance)      // 0
+//
+func (a assuranceLevel) Compare(other assuranceLevel) int {
+	if a == other {
+		return 0
+	}
+	if a < other {
+		return 1
+	}
+	return -1
+}
 
 // Information about the Key that belongs to the issued Certificate.
 // This contains information about the type of device that holds the
@@ -64,6 +98,20 @@ type Policy struct {
 	Issued Issued
 }
 
+type Policies []Policy
+
+func (p Policies) HighestAssurance() assuranceLevel {
+	loa := UnknownAssurance
+
+	for _, el := range p {
+		if loa.Compare(el.Issued.AssuranceLevel) > 0 {
+			loa = el.Issued.AssuranceLevel
+		}
+	}
+
+	return loa
+}
+
 // Output a human readable string to grok what Policy this is
 func (p Policy) String() string {
 	return fmt.Sprintf(
@@ -76,8 +124,8 @@ func (p Policy) String() string {
 	)
 }
 
-func Policies(ids []asn1.ObjectIdentifier) []Policy {
-	ret := []Policy{}
+func ParsePolicies(ids []asn1.ObjectIdentifier) Policies {
+	ret := Policies{}
 	for _, id := range ids {
 		policy, ok := allPoliciesMap[id.String()]
 		if !ok {
@@ -88,7 +136,7 @@ func Policies(ids []asn1.ObjectIdentifier) []Policy {
 	return ret
 }
 
-func policyMap(policies []Policy) map[string]Policy {
+func policyMap(policies Policies) map[string]Policy {
 	ret := map[string]Policy{}
 	for _, policy := range policies {
 		ret[policy.Id.String()] = policy

@@ -75,7 +75,7 @@ type Certificate struct {
 	// Standards applied to the issuance of this Certificate, such as the
 	// amount of checking into a Person's identity, if this was even a Person,
 	// or if the key is stored on a hardware token.
-	Policies []Policy
+	Policies Policies
 }
 
 // Create a piv.Certificate from a standard crypto/x509.Certificate, parsing
@@ -98,7 +98,7 @@ func NewCertificate(cert *x509.Certificate) (*Certificate, error) {
 		return nil, err
 	}
 
-	ret.Policies = Policies(ret.PolicyIdentifiers)
+	ret.Policies = ParsePolicies(ret.PolicyIdentifiers)
 
 	return &ret, nil
 }
