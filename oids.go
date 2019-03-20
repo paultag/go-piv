@@ -4,19 +4,6 @@ import (
 	"encoding/asn1"
 )
 
-/*
-
-Levels:
-
-NPE = Non-Person-Entity
-
-Medium NPE, Medium NPE-112 and Medium NPE-128;
-Medium, Medium-2048, Medium-112 and Medium-128;
-Medium Hardware, Medium Hardware-2048, Medium Hardware-112 and Medium Hardware-128;
-
-PIV-Auth and PIV-Auth-2048. (Medium Hardware, but only used for physical)
-*/
-
 // Information about the Key that belongs to the issued Certificate.
 // This contains information about the type of device that holds the
 // key, as well as the subscriber that that it was issued to.
@@ -151,6 +138,7 @@ const (
 		DoDMediumNPE, DoDMediumNPE112, DoDMediumNPE128,
 		DoDMedium, DoDMedium2048, DoDMedium112, DoDMedium128,
 		DoDMediumHardware, DoDMediumHardware2048, DoDMediumHardware112, DoDMediumHardware128,
+		DoDPIVAuth, DoDPIVAuth2048,
 		DoDFORTEZZA,
 		DoDType1,
 	}
