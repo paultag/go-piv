@@ -166,7 +166,211 @@ var (
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 6},
 		Issued: Issued{Person: false, Hardware: true},
 	}
+)
 
+var (
+	// Low risk – authentication, signature or encryption of individual person.
+	fbcaRudimentary = Policy{
+		Name:   "fbcaRudimentary",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 1},
+		Issued: Issued{Person: true, Hardware: false},
+	}
+
+	// Low risk – authentication, signature or encryption of individual person.
+	fbcaBasic = Policy{
+		Name:   "fbcaBasic",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 2},
+		Issued: Issued{Person: true, Hardware: false},
+	}
+
+	// Medium risk – authentication, signature or encryption of individual
+	// person, group, device, or role.
+	fbcaMedium = Policy{
+		Name:   "fbcaMedium",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 3},
+		Issued: Issued{Person: true, Hardware: false},
+	}
+
+	// Medium risk – authentication, signature or encryption of individual
+	// person, group, device, or role where private key is protected on
+	// hardware token.
+	fbcaMediumHW = Policy{
+		Name:   "fbcaMediumHW",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 12},
+		Issued: Issued{Person: true, Hardware: true},
+	}
+
+	// Medium risk – authentication, signature or encryption of individual
+	// person, group, device, or role.
+	fbcaMediumCBP = Policy{
+		Name:   "fbcaMediumCBP",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 14},
+		Issued: Issued{Person: false, Hardware: false},
+	}
+
+	// Medium risk – authentication, signature or encryption of individual
+	// person, group, or role where private key is protected on hardware token.
+	fbcaMediumHWCBP = Policy{
+		Name:   "fbcaMediumHWCBP",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 15},
+		Issued: Issued{Person: false, Hardware: true},
+	}
+
+	// Medium risk - authentication or encryption of device
+	fbcaMediumDevice = Policy{
+		Name:   "fbcaMediumDevice",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 37},
+		Issued: Issued{Person: false, Hardware: false},
+	}
+
+	// Medium risk - authentication or encryption of device where private key
+	// protected on hardware token.
+	fbcaMediumDeviceHW = Policy{
+		Name:   "fbcaMediumDeviceHW",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 38},
+		Issued: Issued{Person: false, Hardware: true},
+	}
+
+	// High risk – authentication, signature or encryption of USG individual
+	// person, group, role, or device where private key protected on hardware
+	// token.
+	fbcaHigh = Policy{
+		Name:   "fbcaHigh",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 4},
+		Issued: Issued{Person: true, Hardware: true},
+	}
+
+	// Medium risk – authentication, signature or encryption of individual
+	// person where private key is protected on APL approved smartcard and
+	// requires biometric on card.
+	fbcaPIVIHW = Policy{
+		Name:   "fbcaPIVIHW",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 18},
+		Issued: Issued{Person: true, Hardware: true},
+	}
+
+	// Shows possession of PIV-I card w/o PIN use.
+	fbcaPIVICardAuth = Policy{
+		Name:   "fbcaPIVICardAuth",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 19},
+		Issued: Issued{Person: true, Hardware: true},
+	}
+
+	// Signs security objects on PIV-I card.
+	fbcaPIVIContentSigning = Policy{
+		Name:   "fbcaPIVIContentSigning",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 20},
+		Issued: Issued{Person: false, Hardware: true},
+	}
+
+	// All of the SHA policies aren't added because SHA isn't trusted anymore,
+	// so assertions of policy are basically uninteresting.
+
+	// // Medium risk – authentication, signature or encryption of individual
+	// // person, group, device, or role. (sHA1)
+	// sHA1mediumCBP = Policy{
+	// 	Name:   "sHA1mediumCBP",
+	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 21},
+	// 	Issued: Issued{},
+	// }
+
+	// // Medium risk – authentication, signature or encryption of individual
+	// // person, group, or role where private key is protected on hardware token.
+	// // (sHA1)
+	// sHA1mediumHWCBP = Policy{
+	// 	Name:   "sHA1mediumHWCBP",
+	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 22},
+	// 	Issued: Issued{},
+	// }
+
+	// // Medium risk – authentication, signature or encryption of individual
+	// // person, group, device, or role. (sHA1)
+	// sHA1medium = Policy{
+	// 	Name:   "sHA1medium",
+	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 23},
+	// 	Issued: Issued{},
+	// }
+
+	// // Medium risk – authentication, signature or encryption of individual
+	// // person, group, or role where private key is protected on hardware token.
+	// // (sHA1)
+	// sHA1mediumHW = Policy{
+	// 	Name:   "sHA1mediumHW",
+	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 24},
+	// 	Issued: Issued{},
+	// }
+
+	// // Medium risk - authentication or encryption of device .(sHA1)
+	// sHA1devices = Policy{
+	// 	Name:   "sHA1devices",
+	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 25},
+	// 	Issued: Issued{},
+	// }
+
+	// Medium risk – authentication, signature or encryption of USG individual
+	// person, group, device, or role.
+	commonPolicy = Policy{
+		Name:   "commonPolicy",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 6},
+		Issued: Issued{Person: true, Hardware: false},
+	}
+
+	// High risk – authentication, signature or encryption of USG individual
+	// person, group, role, or device where private key is protected on
+	// hardware token.
+	commonHW = Policy{
+		Name:   "commonHW",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 7},
+		Issued: Issued{Person: true, Hardware: true},
+	}
+
+	// Medium risk – USG authentication or encryption of device.
+	commonDevices = Policy{
+		Name:   "commonDevices",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 8},
+		Issued: Issued{Person: false, Hardware: false},
+	}
+
+	// Medium risk - authentication or encryption of USG device where private
+	// key protected on hardware token.
+	commonDevicesHW = Policy{
+		Name:   "commonDevicesHW",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 36},
+		Issued: Issued{Person: false, Hardware: true},
+	}
+
+	// High risk - Shows possession of PIV card with PIN use
+	commonAuth = Policy{
+		Name:   "commonAuth",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 13},
+		Issued: Issued{Person: true, Hardware: true},
+	}
+
+	// High risk – authentication, signature or encryption of USG individual
+	// person, group, role, or device where private key is protected on
+	// hardware token.
+	commonHigh = Policy{
+		Name:   "commonHigh",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 16},
+		Issued: Issued{Person: true, Hardware: true},
+	}
+
+	// Shows possession of PIV card w/o PIN use.
+	commoncardAuth = Policy{
+		Name:   "commonCardAuth",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 17},
+		Issued: Issued{Person: true, Hardware: true},
+	}
+
+	// Signs security objects on PIV or Derived PIV.
+	commonPIVContentSigning = Policy{
+		Name:   "commonPIVContentSigning",
+		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 39},
+		Issued: Issued{Person: false, Hardware: true},
+	}
+)
+
+var (
 	allPolicies []Policy = []Policy{
 		dodMediumNPE, dodMediumNPE112, dodMediumNPE128,
 		dodMedium, dodMedium2048, dodMedium112, dodMedium128,
@@ -174,6 +378,14 @@ var (
 		dodPIVAuth, dodPIVAuth2048,
 		dodFORTEZZA,
 		dodType1,
+
+		fbcaRudimentary, fbcaBasic,
+		fbcaMedium, fbcaMediumHW,
+		fbcaMediumCBP, fbcaMediumHWCBP,
+		fbcaMediumDevice, fbcaMediumDeviceHW,
+		fbcaHigh, fbcaPIVIHW, fbcaPIVICardAuth, fbcaPIVIContentSigning,
+		commonPolicy, commonHW, commonDevices, commonDevicesHW, commonAuth,
+		commonHigh, commoncardAuth, commonPIVContentSigning,
 	}
 
 	allPoliciesMap = policyMap(allPolicies)
