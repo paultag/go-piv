@@ -26,9 +26,9 @@ import (
 	"encoding/asn1"
 )
 
-// This is *not* an LOA number as defined by OMB M04-04
 type assuranceLevel uint
 
+// This is *not* an LOA number as defined by OMB M04-04
 var (
 	UnknownAssurance     assuranceLevel = 0
 	RudimentaryAssurance assuranceLevel = 1
