@@ -17,14 +17,15 @@ Medium Hardware, Medium Hardware-2048, Medium Hardware-112 and Medium Hardware-1
 PIV-Auth and PIV-Auth-2048. (Medium Hardware, but only used for physical)
 */
 
-type TokenClass struct {
+type Issued struct {
 	Hardware bool
 	Person   bool
 }
 
 type Policy struct {
-	Name string
-	Id   asn1.ObjectIdentifier
+	Name   string
+	Id     asn1.ObjectIdentifier
+	Issued Issued
 }
 
 const (
