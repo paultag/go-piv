@@ -72,6 +72,9 @@ type Certificate struct {
 	// but still written to new Certificates.
 	FASCs []fasc.FASC
 
+	// Standards applied to the issuance of this Certificate, such as the
+	// amount of checking into a Person's identity, if this was even a Person,
+	// or if the key is stored on a hardware token.
 	Policies []Policy
 }
 
