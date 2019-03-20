@@ -63,117 +63,117 @@ func policyMap(policies []Policy) map[string]Policy {
 }
 
 var (
-	// DoDBasic = Policy{
-	// 	Name:       "DoDBasic",
+	// dodBasic = Policy{
+	// 	Name:       "dodBasic",
 	// 	Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 2},
 	// 	Issued: Issued{
 	// 	},
 	// }
 
 	// Medium assurance
-	DoDMediumNPE = Policy{
-		Name:   "DoDMediumNPE",
+	dodMediumNPE = Policy{
+		Name:   "dodMediumNPE",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 17},
 		Issued: Issued{Person: false, Hardware: false},
 	}
 
-	DoDMediumNPE112 = Policy{
-		Name:   "DoDMediumNPE112",
+	dodMediumNPE112 = Policy{
+		Name:   "dodMediumNPE112",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 36},
 		Issued: Issued{Person: false, Hardware: false},
 	}
 
-	DoDMediumNPE128 = Policy{
-		Name:   "DoDMediumNPE128",
+	dodMediumNPE128 = Policy{
+		Name:   "dodMediumNPE128",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 37},
 		Issued: Issued{Person: false, Hardware: false},
 	}
 
-	DoDMedium = Policy{
-		Name:   "DoDMedium",
+	dodMedium = Policy{
+		Name:   "dodMedium",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 5},
 		Issued: Issued{Person: true, Hardware: false},
 	}
 
-	DoDMedium2048 = Policy{
-		Name:   "DoDMedium2048",
+	dodMedium2048 = Policy{
+		Name:   "dodMedium2048",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 18},
 		Issued: Issued{Person: true, Hardware: false},
 	}
 
-	DoDMedium112 = Policy{
-		Name:   "DoDMedium112",
+	dodMedium112 = Policy{
+		Name:   "dodMedium112",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 39},
 		Issued: Issued{Person: true, Hardware: false},
 	}
 
-	DoDMedium128 = Policy{
-		Name:   "DoDMedium128",
+	dodMedium128 = Policy{
+		Name:   "dodMedium128",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 40},
 		Issued: Issued{Person: true, Hardware: false},
 	}
 
-	DoDMediumHardware = Policy{
-		Name:   "DoDMediumHardware",
+	dodMediumHardware = Policy{
+		Name:   "dodMediumHardware",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 9},
 		Issued: Issued{Person: true, Hardware: true},
 	}
 
-	DoDMediumHardware2048 = Policy{
-		Name:   "DoDMediumHardware2048",
+	dodMediumHardware2048 = Policy{
+		Name:   "dodMediumHardware2048",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 19},
 		Issued: Issued{Person: true, Hardware: true},
 	}
 
-	DoDMediumHardware112 = Policy{
-		Name:   "DoDMediumHardware112",
+	dodMediumHardware112 = Policy{
+		Name:   "dodMediumHardware112",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 42},
 		Issued: Issued{Person: true, Hardware: true},
 	}
 
-	DoDMediumHardware128 = Policy{
-		Name:   "DoDMediumHardware128",
+	dodMediumHardware128 = Policy{
+		Name:   "dodMediumHardware128",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 43},
 		Issued: Issued{Person: true, Hardware: true},
 	}
 
-	DoDPIVAuth = Policy{
-		Name:   "DoDPIVAuth",
+	dodPIVAuth = Policy{
+		Name:   "dodPIVAuth",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 10},
 		Issued: Issued{Person: true, Hardware: true},
 	}
 
-	DoDPIVAuth2048 = Policy{
-		Name:   "DoDPIVAuth2048",
+	dodPIVAuth2048 = Policy{
+		Name:   "dodPIVAuth2048",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 20},
 		Issued: Issued{Person: true, Hardware: true},
 	}
 
-	// DoDPeerInterop = Policy{
-	// 	Name:       "DoDPeerInterop",
+	// dodPeerInterop = Policy{
+	// 	Name:       "dodPeerInterop",
 	// 	Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 31},
 	// 	Issued: Issued{},
 	// }
 
-	DoDFORTEZZA = Policy{
-		Name:   "DoDFORTEZZA",
+	dodFORTEZZA = Policy{
+		Name:   "dodFORTEZZA",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 4},
 		Issued: Issued{Person: true, Hardware: true},
 	}
 
-	DoDType1 = Policy{
-		Name:   "DoDType1",
+	dodType1 = Policy{
+		Name:   "dodType1",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 6},
 		Issued: Issued{Person: false, Hardware: true},
 	}
 
 	allPolicies []Policy = []Policy{
-		DoDMediumNPE, DoDMediumNPE112, DoDMediumNPE128,
-		DoDMedium, DoDMedium2048, DoDMedium112, DoDMedium128,
-		DoDMediumHardware, DoDMediumHardware2048, DoDMediumHardware112, DoDMediumHardware128,
-		DoDPIVAuth, DoDPIVAuth2048,
-		DoDFORTEZZA,
-		DoDType1,
+		dodMediumNPE, dodMediumNPE112, dodMediumNPE128,
+		dodMedium, dodMedium2048, dodMedium112, dodMedium128,
+		dodMediumHardware, dodMediumHardware2048, dodMediumHardware112, dodMediumHardware128,
+		dodPIVAuth, dodPIVAuth2048,
+		dodFORTEZZA,
+		dodType1,
 	}
 
 	allPoliciesMap = policyMap(allPolicies)
