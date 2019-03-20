@@ -9,11 +9,10 @@ import (
 type assuranceLevel string
 
 var (
-	RudimentaryAssurance            assuranceLevel = "rudimentary"
-	BasicAssurance                  assuranceLevel = "basic"
-	MediumAssurance                 assuranceLevel = "medium"
-	PIVICardAuthenticationAssurance assuranceLevel = "pivicardauthentication"
-	HighAssurance                   assuranceLevel = "high"
+	RudimentaryAssurance assuranceLevel = "rudimentary"
+	BasicAssurance       assuranceLevel = "basic"
+	MediumAssurance      assuranceLevel = "medium"
+	HighAssurance        assuranceLevel = "high"
 )
 
 // Information about the Key that belongs to the issued Certificate.
@@ -268,7 +267,7 @@ var (
 	fbcaPIVICardAuth = Policy{
 		Name:   "fbcaPIVICardAuth",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 19},
-		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: PIVICardAuthenticationAssurance},
+		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	// Signs security objects on PIV-I card.
@@ -374,7 +373,7 @@ var (
 	commoncardAuth = Policy{
 		Name:   "commonCardAuth",
 		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 17},
-		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: PIVICardAuthenticationAssurance},
+		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	// Signs security objects on PIV or Derived PIV.
