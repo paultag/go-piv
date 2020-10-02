@@ -26,18 +26,29 @@ import (
 	"encoding/asn1"
 )
 
-type assuranceLevel uint
+// AssuranceLevel is an enum type defining the levels of assurance.
+type AssuranceLevel uint
 
 // This is *not* an LOA number as defined by OMB M04-04
 var (
-	UnknownAssurance     assuranceLevel = 0
-	RudimentaryAssurance assuranceLevel = 1
-	BasicAssurance       assuranceLevel = 2
-	MediumAssurance      assuranceLevel = 3
-	HighAssurance        assuranceLevel = 4
+	// UnknownAssurance, as defined by the PIV specs.
+	UnknownAssurance AssuranceLevel = 0
+
+	// RudimentaryAssurance, as defined by the PIV specs.
+	RudimentaryAssurance AssuranceLevel = 1
+
+	// BasicAssurance, as defined by the PIV specs.
+	BasicAssurance AssuranceLevel = 2
+
+	// MediumAssurance, as defined by the PIV specs.
+	MediumAssurance AssuranceLevel = 3
+
+	// HighAssurance, as defined by the PIV specs.
+	HighAssurance AssuranceLevel = 4
 )
 
-func (a assuranceLevel) String() string {
+// String will return the value as a human readable string.
+func (a AssuranceLevel) String() string {
 	switch a {
 	case RudimentaryAssurance:
 		return "Rudimentary"
@@ -51,7 +62,7 @@ func (a assuranceLevel) String() string {
 	return "Unknown"
 }
 
-// This returns -1 if the LOA this function is bound to is _less_ strict
+// Compare returns -1 if the LOA this function is bound to is _less_ strict
 // than the given LOA, 0 if they're the same, and 1 if the bound LOA
 // is _more_ strict than the given LOA.
 //
@@ -59,7 +70,7 @@ func (a assuranceLevel) String() string {
 // MediumAssurance.Compare(HighAssurance)        // 1
 // MediumAssurance.Compare(MediumAssurance)      // 0
 //
-func (a assuranceLevel) Compare(other assuranceLevel) int {
+func (a AssuranceLevel) Compare(other AssuranceLevel) int {
 	if a == other {
 		return 0
 	}
@@ -69,7 +80,7 @@ func (a assuranceLevel) Compare(other assuranceLevel) int {
 	return -1
 }
 
-// Information about the Key that belongs to the issued Certificate.
+// Issued contains information about the Key that belongs to the issued Certificate.
 // This contains information about the type of device that holds the
 // key, as well as the subscriber that that it was issued to.
 type Issued struct {
@@ -83,24 +94,29 @@ type Issued struct {
 
 	// Level of Assurance that the identity of the subscriber is the actual
 	// identity in this Certificate.
-	AssuranceLevel assuranceLevel
+	AssuranceLevel AssuranceLevel
 }
 
-// An expression of what CA Policy this Certificate was issued under.
+// Policy is information regarding the level of assurance and a human readable
+// name for a specific federal PIV or CAC policy.
 type Policy struct {
 	// Name of the Policy for humans to better understand.
 	Name string
 
 	// Identifier of the ASN.1 ObjectId of this Policy.
-	Id asn1.ObjectIdentifier
+	ID asn1.ObjectIdentifier
 
 	// Information about the key material and subscriber.
 	Issued Issued
 }
 
+// Policies are a set of Policy descriptions.
 type Policies []Policy
 
-func (p Policies) HighestAssurance() assuranceLevel {
+// HighestAssurance returns the highest assurance level contained within
+// the set of policies. This is most useful when looking at the set of policies
+// a specific credential was issued under.
+func (p Policies) HighestAssurance() AssuranceLevel {
 	loa := UnknownAssurance
 
 	for _, el := range p {
@@ -117,13 +133,15 @@ func (p Policy) String() string {
 	return fmt.Sprintf(
 		"%s (%s) person=%t hardware=%t loa=%s",
 		p.Name,
-		p.Id.String(),
+		p.ID.String(),
 		p.Issued.Person,
 		p.Issued.Hardware,
 		p.Issued.AssuranceLevel,
 	)
 }
 
+// ParsePolicies will read a list of ObjectIdentifier objects, and
+// return the known Policy objects as a set of Policies.
 func ParsePolicies(ids []asn1.ObjectIdentifier) Policies {
 	ret := Policies{}
 	for _, id := range ids {

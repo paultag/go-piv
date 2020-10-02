@@ -28,7 +28,8 @@ import (
 	"pault.ag/go/cbeff"
 )
 
-// CBEFF, as read from a PIV, is wrapped in an ASN.1 "TLV" structure.
+// ParseTLVCBEFF will consume CBEFF, as read from a PIV. This format is wrapped
+// in an ASN.1 "TLV" structure, unique to PIV, not CBEFF.
 // This will unwrap the data inside the structure, and attempt to parse
 // the underlying CBEFF data.
 func ParseTLVCBEFF(data []byte) (*cbeff.CBEFF, error) {

@@ -28,8 +28,8 @@ import (
 	"pault.ag/go/othername"
 )
 
-// Extension of the built-in crypto/x509/pkix.Name type. This contains
-// the Name as an any member of the piv.Name struct.
+// Name is an extension of the built-in crypto/x509/pkix.Name type. This contains
+// the pkix.Name plus additional fields, such as the UserID field.
 type Name struct {
 	pkix.Name
 
@@ -38,12 +38,10 @@ type Name struct {
 	UserID []string
 }
 
-// Extension of the built-in crypto/x509.Certificate type. This contains the
-// Certificate as an anonymous member of the piv.Certificate struct.
-//
-// Additionally, it contains the extractions for the PIV peculiar OID values,
-// such as the Microsoft UPN (used for smartcard login), FASCs and if the
-// cardholder has a completed NACI.
+// Certificate is an extension of the built-in crypto/x509.Certificate type.
+// This contains the Certificate as an anonymous member of the piv.Certificate
+// struct, as well as some PIV peculiar OID values, such as the Microsoft UPN
+// (used for smartcard login), FASCs and if the cardholder has a completed NACI.
 type Certificate struct {
 	*x509.Certificate
 
@@ -78,8 +76,8 @@ type Certificate struct {
 	Policies Policies
 }
 
-// Create a piv.Certificate from a standard crypto/x509.Certificate, parsing
-// the various PIV peculiar fields.
+// NewCertificate will create a piv.Certificate from a standard
+// crypto/x509.Certificate, parsing the various PIV peculiar fields.
 func NewCertificate(cert *x509.Certificate) (*Certificate, error) {
 	ret := Certificate{Certificate: cert}
 	var err error
@@ -103,9 +101,9 @@ func NewCertificate(cert *x509.Certificate) (*Certificate, error) {
 	return &ret, nil
 }
 
-// Parse the raw DER into an x.509 Certificate struct, then parse out PIV
-// specific fields. This is shorthand for calling x509.ParseCertificate, then
-// passing that into piv.NewCertificate.
+// ParseCertificate will parse the raw DER into an x.509 Certificate struct,
+// then parse out PIV specific fields. This is shorthand for calling
+// x509.ParseCertificate, then passing that into piv.NewCertificate.
 func ParseCertificate(bytes []byte) (*Certificate, error) {
 	cert, err := x509.ParseCertificate(bytes)
 	if err != nil {

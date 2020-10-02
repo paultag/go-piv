@@ -29,7 +29,7 @@ var (
 	oidNACI = asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 6, 9, 1}
 )
 
-// Check to see if the PIV Certificate in question has the id-piv-NACI
+// HasNACI will check to see if the PIV Certificate in question has the id-piv-NACI
 // ObjectIdentifier, and if so, return the answer to if the NACI has been run
 // on the cardholder.
 //

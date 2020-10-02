@@ -29,8 +29,8 @@ var (
 	oidUID = asn1.ObjectIdentifier{0, 9, 2342, 19200300, 100, 1, 1}
 )
 
-// User ID of the cardholder. This may be used by any number of applications
-// to map a user account to a cardholder.
+// UserIDs returns the User IDs of the cardholder. This may be used by any
+// number of applications to map a user account to a cardholder.
 func UserIDs(name pkix.Name) []string {
 	ret := []string{}
 
