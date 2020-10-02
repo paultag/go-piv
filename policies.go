@@ -27,7 +27,7 @@ import (
 var (
 	// dodBasic = Policy{
 	// 	Name:       "dodBasic",
-	// 	Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 2},
+	// 	ID:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 2},
 	// 	Issued: Issued{
 	// 	},
 	// }
@@ -35,97 +35,97 @@ var (
 	// Medium assurance
 	dodMediumNPE = Policy{
 		Name:   "dodMediumNPE",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 17},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 17},
 		Issued: Issued{Person: false, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMediumNPE112 = Policy{
 		Name:   "dodMediumNPE112",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 36},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 36},
 		Issued: Issued{Person: false, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMediumNPE128 = Policy{
 		Name:   "dodMediumNPE128",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 37},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 37},
 		Issued: Issued{Person: false, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMedium = Policy{
 		Name:   "dodMedium",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 5},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 5},
 		Issued: Issued{Person: true, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMedium2048 = Policy{
 		Name:   "dodMedium2048",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 18},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 18},
 		Issued: Issued{Person: true, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMedium112 = Policy{
 		Name:   "dodMedium112",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 39},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 39},
 		Issued: Issued{Person: true, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMedium128 = Policy{
 		Name:   "dodMedium128",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 40},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 40},
 		Issued: Issued{Person: true, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMediumHardware = Policy{
 		Name:   "dodMediumHardware",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 9},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 9},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMediumHardware2048 = Policy{
 		Name:   "dodMediumHardware2048",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 19},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 19},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMediumHardware112 = Policy{
 		Name:   "dodMediumHardware112",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 42},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 42},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	dodMediumHardware128 = Policy{
 		Name:   "dodMediumHardware128",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 43},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 43},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	dodPIVAuth = Policy{
 		Name:   "dodPIVAuth",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 10},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 10},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	dodPIVAuth2048 = Policy{
 		Name:   "dodPIVAuth2048",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 20},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 20},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	// dodPeerInterop = Policy{
 	// 	Name:       "dodPeerInterop",
-	// 	Id:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 31},
+	// 	ID:         asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 31},
 	// 	Issued: Issued{},
 	// }
 
 	dodFORTEZZA = Policy{
 		Name:   "dodFORTEZZA",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 4},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 4},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: HighAssurance},
 	}
 
 	dodType1 = Policy{
 		Name:   "dodType1",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 6},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 2, 1, 11, 6},
 		Issued: Issued{Person: false, Hardware: true, AssuranceLevel: HighAssurance},
 	}
 )
@@ -134,14 +134,14 @@ var (
 	// Low risk – authentication, signature or encryption of individual person.
 	fbcaRudimentary = Policy{
 		Name:   "fbcaRudimentary",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 1},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 1},
 		Issued: Issued{Person: true, Hardware: false, AssuranceLevel: RudimentaryAssurance},
 	}
 
 	// Low risk – authentication, signature or encryption of individual person.
 	fbcaBasic = Policy{
 		Name:   "fbcaBasic",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 2},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 2},
 		Issued: Issued{Person: true, Hardware: false, AssuranceLevel: BasicAssurance},
 	}
 
@@ -149,7 +149,7 @@ var (
 	// person, group, device, or role.
 	fbcaMedium = Policy{
 		Name:   "fbcaMedium",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 3},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 3},
 		Issued: Issued{Person: true, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
@@ -158,7 +158,7 @@ var (
 	// hardware token.
 	fbcaMediumHW = Policy{
 		Name:   "fbcaMediumHW",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 12},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 12},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
@@ -166,7 +166,7 @@ var (
 	// person, group, device, or role.
 	fbcaMediumCBP = Policy{
 		Name:   "fbcaMediumCBP",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 14},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 14},
 		Issued: Issued{Person: false, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
@@ -174,14 +174,14 @@ var (
 	// person, group, or role where private key is protected on hardware token.
 	fbcaMediumHWCBP = Policy{
 		Name:   "fbcaMediumHWCBP",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 15},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 15},
 		Issued: Issued{Person: false, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	// Medium risk - authentication or encryption of device
 	fbcaMediumDevice = Policy{
 		Name:   "fbcaMediumDevice",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 37},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 37},
 		Issued: Issued{Person: false, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
@@ -189,7 +189,7 @@ var (
 	// protected on hardware token.
 	fbcaMediumDeviceHW = Policy{
 		Name:   "fbcaMediumDeviceHW",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 38},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 38},
 		Issued: Issued{Person: false, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
@@ -198,7 +198,7 @@ var (
 	// token.
 	fbcaHigh = Policy{
 		Name:   "fbcaHigh",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 4},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 4},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: HighAssurance},
 	}
 
@@ -207,21 +207,21 @@ var (
 	// requires biometric on card.
 	fbcaPIVIHW = Policy{
 		Name:   "fbcaPIVIHW",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 18},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 18},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	// Shows possession of PIV-I card w/o PIN use.
 	fbcaPIVICardAuth = Policy{
 		Name:   "fbcaPIVICardAuth",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 19},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 19},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	// Signs security objects on PIV-I card.
 	fbcaPIVIContentSigning = Policy{
 		Name:   "fbcaPIVIContentSigning",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 20},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 20},
 		Issued: Issued{Person: false, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
@@ -232,7 +232,7 @@ var (
 	// // person, group, device, or role. (sHA1)
 	// sHA1mediumCBP = Policy{
 	// 	Name:   "sHA1mediumCBP",
-	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 21},
+	// 	ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 21},
 	// 	Issued: Issued{},
 	// }
 
@@ -241,7 +241,7 @@ var (
 	// // (sHA1)
 	// sHA1mediumHWCBP = Policy{
 	// 	Name:   "sHA1mediumHWCBP",
-	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 22},
+	// 	ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 22},
 	// 	Issued: Issued{},
 	// }
 
@@ -249,7 +249,7 @@ var (
 	// // person, group, device, or role. (sHA1)
 	// sHA1medium = Policy{
 	// 	Name:   "sHA1medium",
-	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 23},
+	// 	ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 23},
 	// 	Issued: Issued{},
 	// }
 
@@ -258,14 +258,14 @@ var (
 	// // (sHA1)
 	// sHA1mediumHW = Policy{
 	// 	Name:   "sHA1mediumHW",
-	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 24},
+	// 	ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 24},
 	// 	Issued: Issued{},
 	// }
 
 	// // Medium risk - authentication or encryption of device .(sHA1)
 	// sHA1devices = Policy{
 	// 	Name:   "sHA1devices",
-	// 	Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 25},
+	// 	ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 25},
 	// 	Issued: Issued{},
 	// }
 
@@ -273,7 +273,7 @@ var (
 	// person, group, device, or role.
 	commonPolicy = Policy{
 		Name:   "commonPolicy",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 6},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 6},
 		Issued: Issued{Person: true, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
@@ -282,14 +282,14 @@ var (
 	// hardware token.
 	commonHW = Policy{
 		Name:   "commonHW",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 7},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 7},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	// Medium risk – USG authentication or encryption of device.
 	commonDevices = Policy{
 		Name:   "commonDevices",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 8},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 8},
 		Issued: Issued{Person: false, Hardware: false, AssuranceLevel: MediumAssurance},
 	}
 
@@ -297,14 +297,14 @@ var (
 	// key protected on hardware token.
 	commonDevicesHW = Policy{
 		Name:   "commonDevicesHW",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 36},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 36},
 		Issued: Issued{Person: false, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	// High risk - Shows possession of PIV card with PIN use
 	commonAuth = Policy{
 		Name:   "commonAuth",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 13},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 13},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
@@ -313,21 +313,21 @@ var (
 	// hardware token.
 	commonHigh = Policy{
 		Name:   "commonHigh",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 16},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 16},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: HighAssurance},
 	}
 
 	// Shows possession of PIV card w/o PIN use.
 	commoncardAuth = Policy{
 		Name:   "commonCardAuth",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 17},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 17},
 		Issued: Issued{Person: true, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 
 	// Signs security objects on PIV or Derived PIV.
 	commonPIVContentSigning = Policy{
 		Name:   "commonPIVContentSigning",
-		Id:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 39},
+		ID:     asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 2, 1, 3, 39},
 		Issued: Issued{Person: false, Hardware: true, AssuranceLevel: MediumAssurance},
 	}
 )

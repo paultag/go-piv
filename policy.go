@@ -157,7 +157,7 @@ func ParsePolicies(ids []asn1.ObjectIdentifier) Policies {
 func policyMap(policies Policies) map[string]Policy {
 	ret := map[string]Policy{}
 	for _, policy := range policies {
-		ret[policy.Id.String()] = policy
+		ret[policy.ID.String()] = policy
 	}
 	return ret
 }
